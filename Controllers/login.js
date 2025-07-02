@@ -133,3 +133,48 @@ export const login=async(req,res)=>{
     }
 }
 
+export const getAllUsers=async(req,res)=>{
+   const {email}=req.user
+  // console.log("works")
+   if(!email)
+      return res.status(404).json("No email")
+
+   try{
+      if(email==process.env.EMAIL_ID)
+      {
+         const users=await User.find().select("email name phoneNumber")
+         //console.log("working")
+         return res.status(200).json(users)
+      }
+      else
+      return res.status(401).json("Unverified user")
+   }
+   catch(error)
+   {
+      console.log(error.message)
+   }
+}
+
+export const completeYourProfile=async(req,res)=>{
+   const {email}=req.user
+   const {name,phoneNumber}=req.body
+   if(!email)
+      return res.status(404).json("No email")
+
+   try{
+      const user=await User.findOne({email})
+      if(!user)
+         return res.status(404).json("User does not exist")
+
+      user.name=name
+      user.phoneNumber=phoneNumber
+      await user.save()
+      const user_data={email:user.email,name:user.name}
+      return res.status(200).json(user_data)
+   }
+   catch(error)
+   {
+      console.log(error.message)
+   }
+}
+
