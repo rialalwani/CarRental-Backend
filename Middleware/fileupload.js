@@ -10,7 +10,7 @@ const fileFilter=(req,file,cb)=>{
 
 export const upload = multer(
     {
-        dest: "/uploads",
+        dest: "uploads",
         fileFilter:fileFilter,
         limits:{fileSize:2*1024*1024} //2mb
     }
