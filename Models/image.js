@@ -11,6 +11,7 @@ const carImages=new mongoose.Schema({
     filesize:{type:"String",required:"true"},
     price:{type:"Number"},
     availability:{type:"String",enum:["Available","Booked","Not Available"],default:"Available"},
+    nextAvailibility:{type:Date,default:null},
     uploadedAt: {
         type: Date,
         default: Date.now

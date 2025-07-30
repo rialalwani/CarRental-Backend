@@ -1,10 +1,10 @@
-import Bookings from "../Models/Bookings.js";
+import Cancelledbookings from "../Models/Cancelledbookings.js"
 
-export const getMyBookings = async (req, res) => {
+export const getMyCancelledBookings = async (req, res) => {
     const { email } = req.user
     try {
-        const bookings = await Bookings.find({ userEmail: email })
-        return res.status(200).json(bookings)
+        const cancelledBookings=await Cancelledbookings.find({userEmail:email})
+        return res.status(200).json(cancelledBookings)
     }
     catch (error) {
         console.log(error.message)
@@ -12,11 +12,11 @@ export const getMyBookings = async (req, res) => {
     }
 }
 
-export const getAllBookings = async (req, res) => {
+export const getAllCancelledBookings = async (req, res) => {
     const {email} = req.user
     try {
         if (email === process.env.EMAIL_ID) {
-            const bookings = await Bookings.find()
+            const bookings = await Cancelledbookings.find()
             return res.status(200).json(bookings)
         }
         else

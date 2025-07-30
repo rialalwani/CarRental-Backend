@@ -15,8 +15,9 @@ v2.config({
 export const uploadimage = async (req, res) => {
     /*if(err)
         return res.status(404).json(err.message)*/
-    console.log(req.file)
-    console.log(req.body)
+    const {email}=req.user
+    if(email!==process.env.EMAIL_ID)
+        return res.status(401).json("Unauthorized user")
 
     try {
         const result = await v2.uploader.upload(req.file.path)
@@ -54,6 +55,10 @@ export const getImages = async (req, res) => {
 
 export const updateImage = async (req, res) => {
     try {
+        const {email}=req.user
+        if(email!==process.env.EMAIL_ID)
+        return res.status(401).json("Unauthorized user")
+
         const { _id } = req.body
         const imageData = await CarImages.findById({ _id })
         if (!imageData) {
@@ -79,6 +84,10 @@ export const updateImage = async (req, res) => {
 }
 
 export const updateImageData = async (req, res) => {
+    const {email}=req.user
+    if(email!==process.env.EMAIL_ID)
+        return res.status(401).json("Unauthorized user")
+
     const { _id, price, carname, cardesc } = req.body
     console.log(req.body)
 
@@ -104,6 +113,11 @@ export const updateImageData = async (req, res) => {
 }
 
 export const deleteImage = async (req, res) => {
+
+    const {email}=req.user
+    if(email!==process.env.EMAIL_ID)
+        return res.status(401).json("Unauthorized user")
+
     const { _id } = req.body
     const imageData = await CarImages.findById({ _id })
     if (!imageData)
@@ -122,6 +136,11 @@ export const deleteImage = async (req, res) => {
 }
 
 export const updateAvailability = async (req, res) => {
+
+    const {email}=req.user
+    if(email!==process.env.EMAIL_ID)
+        return res.status(401).json("Unauthorized user")
+
     const { _id } = req.body
     try {
         const imageData = await CarImages.findById({ _id })

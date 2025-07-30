@@ -19,6 +19,7 @@ const SocketAuth=(socket,next)=>{
         //console.log("user verified")
         socket.fcmToken=fcmToken
         //console.log("token verified",fcmToken)
+        //console.log("verification done")
         next()
     }
     catch(error)
