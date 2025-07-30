@@ -1,13 +1,16 @@
 import Bookings from "../Models/Bookings.js"
 import CarImages from "../Models/image.js"
 import admin from "firebase-admin"
-import serviceAccount from "../../../../../Downloads/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json" assert {type: "json"}
 import User from "../Models/user.js"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import Cancelledbookings from "../Models/Cancelledbookings.js"
 
 dotenv.config()
+
+const serviceAccount = JSON.parse(
+  readFileSync('/etc/secrets/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json', 'utf8')
+);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
