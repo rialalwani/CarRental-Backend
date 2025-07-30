@@ -5,6 +5,7 @@ import User from "../Models/user.js"
 import dotenv from "dotenv"
 import mongoose from "mongoose"
 import Cancelledbookings from "../Models/Cancelledbookings.js"
+import { readFileSync } from 'fs';
 
 dotenv.config()
 
