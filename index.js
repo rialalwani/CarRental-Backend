@@ -13,6 +13,7 @@ import Socket from "./Middleware/socket.js"
 import bookingRoutes from "./Routes/Bookings.js"
 import scheduler from "./Scheduler.js"
 import sendEmailRoutes from "./Routes/SendDocuments.js"
+import paymentRoutes from "./Routes/Payment.js"
 
 dotenv.config()
 const app = express()
@@ -32,6 +33,7 @@ app.use("/forget-password", resetPassword)
 app.use("/cars", images)
 app.use("/bookings", bookingRoutes)
 app.use("/email", sendEmailRoutes)
+app.use("/payment", paymentRoutes)
 
 const server = http.createServer(app)
 const io = new Server(server, { cors: { origin: "http://localhost:3000" }, methods: ["GET", "POST"], credentials: true })

@@ -5,6 +5,6 @@ import multer from "multer"
 const routes=express.Router()
 const upload=multer()
  
-routes.post("/senddocs",upload.none(),sendEmail)
+routes.post("/senddocs",upload.none(),sendEmail) 
 
 export default routes

@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import Cancelledbookings from "../Models/Cancelledbookings.js"
 import { readFileSync } from 'fs';
+//import serviceAccount from "../../../../../Downloads/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json" assert { type: 'json' };
 
 dotenv.config()
 
@@ -145,7 +146,7 @@ const CarBookings = (io) => {
 
 
 
-    socket.on("paymentDone", async ({ bookingId }) => {
+    /*socket.on("paymentDone", async ({ bookingId }) => {
       try {
         console.log(bookingId)
         const id = new mongoose.Types.ObjectId(bookingId)
@@ -188,7 +189,38 @@ const CarBookings = (io) => {
       catch (error) {
         console.log(error.message)
       }
-    })
+    })*/
+
+    socket.on("booking-completed",async({bookingId})=>{
+      const id = new mongoose.Types.ObjectId(bookingId)
+      const bookingDetails = await Bookings.findById(id)
+      const { carId } = bookingDetails
+      const car=await CarImages.findById(carId)
+      
+      const notification = `Booking for ${car.carname} from ${bookingDetails.bookingStartDate} to ${bookingDetails.bookingEndDate} is completed.\nTap to see the details`
+
+
+        if (ownerSocketId) {
+          io.to(ownerSocketId).emit("NewBooking", { message: notification })
+          console.log("sent", ownerSocketId)
+        }
+        else {
+          const ownerEmail = process.env.EMAIL_ID
+          const owner = await User.findOne({ email: ownerEmail })
+          const message = {
+            notification: {
+              title: "New Booking",
+              body: notification
+            },
+            token: owner.fcmToken
+          }
+          //console.log("Owner FCM Token:", owner.fcmToken)
+          if (owner.fcmToken) {
+            const response = await admin.messaging().send(message)
+            console.log(response)
+          }
+    }
+  })
 
 
 
