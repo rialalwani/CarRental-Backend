@@ -6,13 +6,13 @@ import dotenv from "dotenv"
 import mongoose from "mongoose"
 import Cancelledbookings from "../Models/Cancelledbookings.js"
 import { readFileSync } from 'fs';
-import serviceAccount from "../../../../../Downloads/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json" assert { type: 'json' };
+//import serviceAccount from "../../../../../Downloads/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json" assert { type: 'json' };
 
 dotenv.config()
 
-/*const serviceAccount = JSON.parse(
+const serviceAccount = JSON.parse(
   readFileSync('/etc/secrets/car-rental-68d5f-firebase-adminsdk-fbsvc-331f56efb0.json', 'utf8')
-);*/
+);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
