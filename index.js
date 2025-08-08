@@ -18,7 +18,7 @@ import paymentRoutes from "./Routes/Payment.js"
 dotenv.config()
 const app = express()
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: "https://car-rental-frontend-b4epna7n0-ria-lalwanis-projects.vercel.app/",
 }))
 app.use(express.json())
 
