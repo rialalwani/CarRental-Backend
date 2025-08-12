@@ -36,7 +36,7 @@ app.use("/email", sendEmailRoutes)
 app.use("/payment", paymentRoutes)
 
 const server = http.createServer(app)
-const io = new Server(server, { cors: { origin: "http://localhost:3000" }, methods: ["GET", "POST"], credentials: true })
+const io = new Server(server, { cors: { origin: "https://car-rental-frontend-ochre.vercel.app/" }, methods: ["GET", "POST"], credentials: true })
 
 
 cloudinary.config({
