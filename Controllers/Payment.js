@@ -58,6 +58,7 @@ export const verifyPayment = async (req, res) => {
         const carId=booking.carId
         const car = await Image.findById(carId)
         car.availability="Not Available"
+        car.nextAvailibility=booking.bookingEndDate
         await car.save();
 
 
