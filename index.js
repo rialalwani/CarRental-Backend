@@ -18,7 +18,7 @@ import paymentRoutes from "./Routes/Payment.js"
 dotenv.config()
 const app = express()
 app.use(cors({
-    origin: "https://car-rental-frontend-ochre.vercel.app/",
+    origin: "https://car-rental-frontend-ochre.vercel.app",
 }))
 app.use(express.json())
 
@@ -36,7 +36,7 @@ app.use("/email", sendEmailRoutes)
 app.use("/payment", paymentRoutes)
 
 const server = http.createServer(app)
-const io = new Server(server, { cors: { origin: "https://car-rental-frontend-ochre.vercel.app/" }, methods: ["GET", "POST"], credentials: true })
+const io = new Server(server, { cors: { origin: "https://car-rental-frontend-ochre.vercel.app" }, methods: ["GET", "POST"], credentials: true })
 
 
 cloudinary.config({
