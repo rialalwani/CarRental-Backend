@@ -18,7 +18,9 @@ oAuth2Client.setCredentials({refresh_token:process.env.REFRESH_TOKEN})
 const accessToken=(await oAuth2Client.getAccessToken()).token
 
 const transporter=nodemailer.createTransport({
-   service:"gmail",
+    host: "smtp.gmail.com",
+    port:465,
+    secure:true,
    auth:{
       type:"OAuth2",
       user:process.env.EMAIL_ID,

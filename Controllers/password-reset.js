@@ -18,7 +18,9 @@ let otp=""
 let otpExpiry=null
 
 const transporter=nodemailer.createTransport({
-   service:"gmail",
+   host: "smtp.gmail.com",
+   port: 465,
+   secure: true, // true for port 465, false for 587
    auth:{
       type:"OAuth2",
       user:process.env.EMAIL_ID,
