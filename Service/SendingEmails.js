@@ -21,7 +21,7 @@ const transporter=nodemailer.createTransport({
    service:"gmail",
    auth:{
       type:"OAuth2",
-      user:process.env.EMAIL_ID_EMAILS,
+      user:process.env.EMAIL_ID,
       clientId:process.env.CLIENT_ID,
       clientSecret:process.env.CLIENT_SECRET,
       refreshToken:process.env.REFRESH_TOKEN,
@@ -60,7 +60,7 @@ export const sendEmail=async(req,res)=>{
 
     // 4. Compose the email to owner
     const mailOptions = {
-      from: process.env.EMAIL_ID_EMAILS,
+      from: process.env.EMAIL_ID,
       to: process.env.EMAIL_ID, // sending TO owner
       subject: `New Booking from ${user.name}`,
       html: `
