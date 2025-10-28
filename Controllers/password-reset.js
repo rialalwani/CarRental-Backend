@@ -18,9 +18,7 @@ let otp=""
 let otpExpiry=null
 
 const transporter=nodemailer.createTransport({
-   host: "smtp.gmail.com",
-   port: 465,
-   secure: true, // true for port 465, false for 587
+   service:"gmail",
    auth:{
       type:"OAuth2",
       user:process.env.EMAIL_ID,
@@ -99,6 +97,6 @@ export const resetPassword=async(req,res)=>{
     }
     catch(error) 
     {
-        console.log(error.message)
+        console.log(error)
     }
 }
