@@ -88,7 +88,7 @@ export const sendEmail=async(req,res)=>{
 
 
   } catch (err) {
-    console.error("Failed to send booking email:", err.message);
+    console.error("Failed to send booking email:", err);
      return res.status(404).json("Something went wrong...")
   }
 };
